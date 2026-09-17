@@ -1,0 +1,99 @@
+/*
+  Hand-ported subset of @digital-agentur-heidelberg/global-styles-hd-da tokens.
+  Source of truth: node_modules/@digital-agentur-heidelberg/global-styles-hd-da/styles/
+  (abstracts/_colors.scss, _font-sizes.scss, _spaces.scss, _radii.scss, _shadows.scss;
+  themes/_surface.scss, _text.scss, _elevation.scss, _gradients.scss)
+  Re-check against that source at the start of a prototyping session — see AGENTS.md.
+  Only the ramps/semantic tokens actually used by a prototype are ported; add more as needed.
+*/
+
+:root {
+  --font-family: "Noto Sans", system-ui, sans-serif;
+
+  /* colors: abstracts/_colors.scss */
+  --neutral-0: #ffffff;
+  --neutral-50: #f4f3f4;
+  --neutral-100: #e2e1e2;
+  --neutral-150: #cecccf;
+  --neutral-200: #bbb8bc;
+  --neutral-250: #a7a4a8;
+  --neutral-300: #939093;
+  --neutral-450: #605b5f;
+  --neutral-500: #555053;
+  --neutral-700: #322d30;
+  --neutral-800: #211e1f;
+  --neutral-900: #0f0d0d;
+
+  --brand-50: #ffeef6;
+  --brand-100: #ff9ccc;
+  --brand-200: #ff6bb3;
+  --brand-400: #ff0980;
+  --brand-500: #a50050;
+  --brand-600: #760039;
+
+  --info-50: #daeaf6;
+  --info-500: #236192;
+
+  --dark-750: #1a1718;
+  --dark-800: #171415;
+
+  /* semantic: themes/_surface.scss, _text.scss */
+  --surface-primary: var(--neutral-0);
+  --surface-secondary: var(--neutral-50);
+  --surface-tertiary: var(--neutral-100);
+  --surface-inverted: var(--dark-800);
+  --surface-brand: var(--brand-500);
+  --surface-brand-secondary: var(--brand-50);
+
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-450);
+  --text-brand: var(--brand-500);
+  --text-inverted-primary: var(--neutral-100);
+
+  /* gradient: themes/_gradients.scss */
+  --gradient-neutral: linear-gradient(180deg, var(--surface-primary), var(--surface-secondary));
+
+  /* font sizes: abstracts/_font-sizes.scss (subset, steps -1 to 6) */
+  --font-size--1: clamp(0.835rem, 0.75rem + 0.35vw, 0.945rem);
+  --font-size-0: clamp(0.938rem, 0.82rem + 0.37vw, 1.063rem);
+  --font-size-1: clamp(1.055rem, 0.88rem + 0.52vw, 1.222rem);
+  --font-size-2: clamp(1.187rem, 0.95rem + 0.74vw, 1.405rem);
+  --font-size-3: clamp(1.335rem, 1.02rem + 1.01vw, 1.616rem);
+  --font-size-4: clamp(1.502rem, 1.08rem + 1.34vw, 1.859rem);
+  --font-size-6: clamp(1.901rem, 1.17rem + 2.3vw, 2.457rem);
+
+  /* spacing: abstracts/_spaces.scss */
+  --space-0: 0px;
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 8px;
+  --space-4: 12px;
+  --space-5: 16px;
+  --space-6: 20px;
+  --space-7: 24px;
+  --space-8: 28px;
+  --space-9: 32px;
+  --space-10: 40px;
+  --space-11: 48px;
+  --space-12: 64px;
+  --space-13: 80px;
+  --space-14: 96px;
+
+  /* radii: abstracts/_radii.scss */
+  --rounded-1: 2px;
+  --rounded-2: 4px;
+  --rounded-3: 8px;
+  --rounded-4: 12px;
+  --rounded-5: 16px;
+  --rounded-round: 999px;
+
+  /* shadows: abstracts/_shadows.scss */
+  --shadow-color-ambient: rgba(0, 0, 0, 0.06);
+  --shadow-color-key: rgba(0, 0, 0, 0.12);
+  --shadow-1: 0 1px 2px var(--shadow-color-key), 0 0 2px 1px var(--shadow-color-ambient);
+  --shadow-2: 0 2px 4px var(--shadow-color-key), 0 0 4px 2px var(--shadow-color-ambient);
+  --shadow-3: 0 4px 6px var(--shadow-color-key), 0 2px 8px var(--shadow-color-ambient);
+  --shadow-color-inset-top: rgba(0, 0, 0, 0.12);
+  --shadow-color-inset-bottom: rgba(255, 255, 255, 0.12);
+  --shadow-inset-2: inset 0 2px 4px var(--shadow-color-inset-top), inset 0 -2px 4px var(--shadow-color-inset-bottom);
+}

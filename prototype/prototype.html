@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Digital Journey Heidelberg — Landingpage (Click-Dummy)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="tokens.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--font-family);
+        color: var(--text-primary);
+        background: var(--surface-primary);
+        line-height: 1.5;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.15;
+      }
+      p {
+        margin: 0;
+      }
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      a {
+        color: inherit;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
+
+      .icon {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      /* layout width: matches node_modules/@digital-agentur-heidelberg/global-styles-hd-da/
+     styles/utilities/_wrapper.scss .wrapper-inner exactly — used site-wide in the real
+     app (Header.js, page.js's <main>) for horizontal centering. Vertical spacing stays
+     on each section itself, same as the real app (e.g. .dashboard-container's padding-block). */
+      .wrapper-inner {
+        width: min(90rem, 100% - 6vw);
+        margin-inline: auto;
+        overflow: visible;
+      }
+
+      /* header */
+      header.site {
+        background: var(--surface-primary);
+        border-bottom: 1px solid var(--neutral-100);
+      }
+      .header-inner {
+        padding-block: var(--space-5);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+      }
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--rounded-3);
+        background: var(--gradient-neutral);
+        border: 1.5px solid var(--brand-500);
+        display: grid;
+        place-items: center;
+      }
+      .logo-mark svg {
+        width: 18px;
+        height: 18px;
+      }
+      .logo-text strong {
+        display: block;
+        font-size: var(--font-size-0);
+        font-weight: 700;
+      }
+      .logo-text span {
+        display: block;
+        font-size: var(--font-size--1);
+        color: var(--text-secondary);
+      }
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--rounded-round);
+        border: 1px solid var(--neutral-100);
+        background: var(--surface-primary);
+        display: grid;
+        place-items: center;
+        color: var(--text-secondary);
+      }
+
+      /* hero */
+      /* #f9f9f9 sampled directly from hero_light.jpg's own blank corners —
+     lighter/cooler than --neutral-50 (#f4f3f4), so matching it exactly (not
+     the generic token) keeps the section background and the image blending
+     into one another instead of showing a seam. */
+      .hero {
+        background: #f9f9f9;
+      }
+      /* grid (not a full-bleed cover background) so the graphic's size and
+     position are deliberate — hero height comes from .hero-graphic's
+     aspect-ratio instead of forcing near-full-viewport height. */
+      .hero-inner {
+        display: grid;
+        grid-template-columns: minmax(26rem, 34rem) 1fr;
+        align-items: center;
+        gap: var(--space-11);
+        padding-block: var(--space-13);
+      }
+      /* aspect-ratio + object-position crop most of hero_light.jpg's own
+     blank left margin (the badge sits in roughly the right 55% of the
+     892x669 source) while staying conservative enough that the badge
+     itself can never get cropped off, unlike a full-bleed cover. */
+      .hero-graphic {
+        aspect-ratio: 4 / 3;
+      }
+      .hero-graphic img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 72% center;
+      }
+      .hero-copy .eyebrow {
+        font-size: var(--font-size-0);
+        color: var(--text-secondary);
+        margin-bottom: var(--space-3);
+      }
+      .hero-copy h1 {
+        font-size: var(--font-size-6);
+        font-weight: 700;
+        color: var(--text-primary);
+        max-width: 14ch;
+      }
+      .hero-copy p {
+        margin-top: var(--space-6);
+        color: var(--text-secondary);
+        max-width: 46ch;
+        font-size: var(--font-size-0);
+      }
+      .btn-primary {
+        margin-top: var(--space-8);
+        display: inline-block;
+        background: var(--surface-brand);
+        color: var(--text-inverted-primary);
+        text-decoration: none;
+        border: none;
+        border-radius: var(--rounded-2);
+        padding: var(--space-4) var(--space-6);
+        font-size: var(--font-size-0);
+        font-weight: 600;
+      }
+      /* main content */
+      main {
+        padding-block: var(--space-11) var(--space-13);
+      }
+
+      section.block {
+        margin-bottom: var(--space-12);
+      }
+      #leitlinien {
+        padding-top: var(--space-9);
+        margin-bottom: var(--space-14);
+      }
+      .block-title {
+        font-size: var(--font-size--1);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--text-primary);
+        margin-bottom: var(--space-8);
+      }
+      .block-description {
+        font-size: var(--font-size-0);
+        color: var(--text-secondary);
+        max-width: 56ch;
+        margin-bottom: var(--space-8);
+      }
+
+      /* info icon + hover/focus popup — visual reference: the real app's
+     src/components/UI/Tooltip (rounded-3, shadow-2, surface-primary, small
+     arrow, fade+slide in); hand-built here since this prototype is plain
+     HTML/CSS/JS and can't import the React/Radix component. */
+      .info-icon {
+        position: relative;
+        display: inline-flex;
+        flex: none;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        margin-left: var(--space-2);
+        padding: 0;
+        border: none;
+        background: none;
+        color: var(--neutral-250);
+        cursor: help;
+        vertical-align: middle;
+        transition: color 0.15s ease;
+      }
+      .info-icon:hover,
+      .info-icon:focus-visible {
+        color: var(--text-secondary);
+      }
+      .info-tooltip {
+        position: absolute;
+        left: 50%;
+        bottom: calc(100% + 10px);
+        transform: translate(-50%, 4px);
+        width: 320px;
+        padding: var(--space-5) var(--space-6);
+        border-radius: var(--rounded-3);
+        background: var(--surface-primary);
+        box-shadow: var(--shadow-2);
+        color: var(--text-primary);
+        font-size: var(--font-size-0);
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: 1.5;
+        text-align: left;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.15s ease,
+          transform 0.15s ease;
+        z-index: 10;
+      }
+      .info-tooltip-arrow {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        margin: -5px 0 0 -5px;
+        background: var(--surface-primary);
+        box-shadow: var(--shadow-2);
+        clip-path: polygon(100% 0, 0 100%, 100% 100%);
+        transform: rotate(45deg);
+      }
+      .info-icon:hover .info-tooltip,
+      .info-icon:focus-visible .info-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translate(-50%, 0);
+      }
+
+      /* entwicklungsprozess — processOverview.jpg is a single finished
+     infographic (steps/icons/labels baked into the image), so it's shown
+     uncropped at its own aspect ratio rather than forced into a crop box
+     like .hero-graphic. */
+      .process-overview-image {
+        display: block;
+        width: 100%;
+        max-width: 60rem;
+        height: auto;
+        margin: 5rem auto;
+        border-radius: var(--rounded-3);
+      }
+
+      /* grundlage carousel */
+      .grundlage-carousel {
+        position: relative;
+      }
+      .grundlage-grid {
+        display: flex;
+        gap: var(--space-9);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        padding: var(--space-3) var(--space-1) var(--space-6);
+      }
+      .grundlage-grid::-webkit-scrollbar {
+        display: none;
+      }
+      /* neumorphic, matching .leitlinie: same hand-crafted light+dark shadow pair,
+     border dropped in favor of the shadow reading as the shape's edge. Card is
+     the cover image full-bleed; name/description live in a panel that slides
+     up from the bottom on hover/focus. */
+      .grundlage-card {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        width: 240px;
+        aspect-ratio: 3 / 4;
+        position: relative;
+        display: block;
+        overflow: hidden;
+        box-shadow:
+          6px 6px 12px rgba(0, 0, 0, 0.1),
+          -6px -6px 12px rgba(255, 255, 255, 0.8);
+      }
+      .grundlage-card .image-slot {
+        width: 100%;
+        height: 100%;
+      }
+      .grundlage-card .image-slot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .grundlage-card .hover-panel {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: var(--space-6);
+        background: var(--surface-primary);
+        transform: translateY(100%);
+        transition: transform 0.2s ease;
+      }
+      .grundlage-card:hover .hover-panel,
+      .grundlage-card:focus-visible .hover-panel {
+        transform: translateY(0);
+      }
+      .grundlage-card .label {
+        display: block;
+        font-size: var(--font-size-0);
+        font-weight: 600;
+      }
+      /* shared bar styling — used on .grundlage-card and .kpi-face.back, each
+     with their own layout (margin/width) set separately below */
+      .desc-skeleton {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+      .desc-skeleton span {
+        display: block;
+        height: 8px;
+        border-radius: var(--rounded-1);
+        background: var(--neutral-100);
+      }
+      .desc-skeleton span:nth-child(1) {
+        width: 100%;
+      }
+      .desc-skeleton span:nth-child(2) {
+        width: 80%;
+      }
+      .grundlage-card .desc-skeleton {
+        margin-top: var(--space-4);
+      }
+
+      .carousel-btn {
+        position: absolute;
+        top: 40%;
+        transform: translateY(-50%);
+        width: 36px;
+        height: 36px;
+        border-radius: var(--rounded-round);
+        border: 1px solid var(--neutral-100);
+        background: var(--surface-primary);
+        color: var(--text-primary);
+        box-shadow: var(--shadow-2);
+        display: grid;
+        place-items: center;
+        z-index: 1;
+      }
+      .carousel-btn.prev {
+        left: -18px;
+      }
+      .carousel-btn.next {
+        right: -18px;
+      }
+      .carousel-btn:disabled {
+        opacity: 0.35;
+      }
+
+      /* leitlinien accordion — neumorphic rows. The design system has no light+
+     dark shadow pair (only a single-tone outer --shadow-1..4, or dual-tone
+     but inset-only --shadow-inset-2) — true neumorphism needs both a light
+     highlight and a dark shadow simultaneously, so that pair is hand-crafted
+     here as a deliberate, scoped exception rather than pulled from tokens.css.
+     Replaces the old line dividers with shadow + gap separation; closed rows
+     read as raised, the open row reads as pressed in (real --shadow-inset-2). */
+      #leitlinien-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+      }
+      /* the shape lives on .leitlinie itself (header + panel together, per the
+     "include the panel content" iteration) — header/panel below are plain
+     content, no background/shadow of their own */
+      .leitlinie {
+        background: var(--surface-primary);
+        border-radius: var(--rounded-5);
+        overflow: hidden;
+        box-shadow:
+          6px 6px 12px rgba(0, 0, 0, 0.1),
+          -6px -6px 12px rgba(255, 255, 255, 0.8);
+        transition: box-shadow 0.15s ease;
+      }
+      .leitlinie.open {
+        box-shadow: var(--shadow-inset-2);
+      }
+      .leitlinie-header {
+        width: 100%;
+        background: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: var(--space-5);
+        padding: var(--space-7);
+        text-align: left;
+      }
+      .leitlinie-header img.pillar-icon {
+        width: 32px;
+        height: 32px;
+        flex: none;
+      }
+      .leitlinie-header .title {
+        flex: 1;
+        font-size: var(--font-size-0);
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+      .leitlinie-header .counts {
+        display: flex;
+        align-items: center;
+        gap: var(--space-5);
+        color: var(--text-primary);
+        font-size: var(--font-size--1);
+      }
+      .leitlinie-header .counts b {
+        font-size: var(--font-size-1);
+        display: block;
+      }
+      .leitlinie-header .counts .sep {
+        color: var(--neutral-200);
+      }
+      .leitlinie-header .chevron {
+        color: var(--text-secondary);
+        transition: transform 0.15s ease;
+      }
+      .leitlinie.open .chevron {
+        transform: rotate(180deg);
+      }
+
+      .leitlinie-panel {
+        display: none;
+        padding: var(--space-6) var(--space-7) var(--space-9);
+      }
+      .leitlinie.open .leitlinie-panel {
+        display: block;
+      }
+
+      .panel-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-9);
+        margin-bottom: var(--space-8);
+      }
+      .panel-top h4 {
+        font-size: var(--font-size--1);
+        font-weight: 700;
+        color: var(--text-secondary);
+        letter-spacing: 0.04em;
+        margin-bottom: var(--space-4);
+      }
+      .wir-wollen li {
+        font-size: var(--font-size--1);
+        margin-bottom: var(--space-3);
+        padding-left: var(--space-5);
+        position: relative;
+      }
+      .wir-wollen li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--text-secondary);
+      }
+      .kernziele {
+        display: flex;
+        gap: var(--space-5);
+      }
+      .kernziel {
+        text-align: center;
+        width: 80px;
+      }
+      .kernziel .icon-badge {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--rounded-3);
+        border: 1px solid var(--neutral-100);
+        display: grid;
+        place-items: center;
+        margin: 0 auto var(--space-2);
+        color: var(--text-secondary);
+      }
+      .kernziel span {
+        font-size: var(--font-size--2, 0.75rem);
+        color: var(--text-secondary);
+      }
+
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+        gap: var(--space-5);
+      }
+      /* re-skinned per real src/styles/components/_kpi.scss .kpi (elevated-2 bg,
+     rounded-2) — shadow-1 added on top since the real .kpi has none of its own
+     and instead relies on its .topic parent card for that; we're not building
+     a Topic wrapper here, so the shadow moves onto the tile itself. Background/
+     radius/shadow/padding now live on .kpi-face (front and back both need their
+     own, so either one looks like "the card" depending which is facing you). */
+      .kpi-card {
+        position: relative;
+        perspective: 1000px;
+        min-height: 150px;
+      }
+      .kpi-card.compound {
+        min-height: 320px;
+      }
+      .kpi-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        transition: transform 0.5s;
+        transform-style: preserve-3d;
+      }
+      .kpi-card.flipped .kpi-card-inner {
+        transform: rotateY(180deg);
+      }
+      .kpi-face {
+        position: absolute;
+        inset: 0;
+        background: var(--surface-primary);
+        border-radius: var(--rounded-2);
+        box-shadow: var(--shadow-1);
+        padding: 1rem;
+        backface-visibility: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      /* row layout: image fills the full card height as a proportional
+     square (aspect-ratio:1 + align-items:stretch — width tracks whatever
+     height the card ends up at, 150px plain or 320px .compound), heading/
+     description/link sit in their own padded column on the right. .back
+     zeroes out the shared .kpi-face padding so the image can reach all
+     three non-text edges; .back-content carries its own padding instead. */
+      .kpi-face.back {
+        transform: rotateY(180deg);
+        flex-direction: row;
+        align-items: stretch;
+        text-align: left;
+        padding: 0;
+      }
+      .kpi-face.back .back-image {
+        flex: none;
+        aspect-ratio: 1;
+        border-radius: var(--rounded-2) 0 0 var(--rounded-2);
+        background: var(--surface-tertiary);
+        color: var(--neutral-300);
+        display: grid;
+        place-items: center;
+      }
+      .kpi-face.back .back-content {
+        flex: 1;
+        min-width: 0;
+        padding: var(--space-5) var(--space-6);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--space-3);
+      }
+      .kpi-face.back .back-label {
+        font-size: var(--font-size--1);
+        font-weight: 600;
+      }
+      .kpi-face.back .desc-skeleton {
+        width: 100%;
+      }
+      .flip-hint {
+        position: absolute;
+        right: var(--space-3);
+        bottom: var(--space-3);
+        color: var(--neutral-250);
+      }
+      .kpi-face.back .topic-link {
+        font-size: var(--font-size--1);
+        font-weight: 600;
+        color: var(--text-brand);
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+      }
+      .kpi-card .cap {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        font-size: var(--font-size--2, 0.75rem);
+        color: var(--text-secondary);
+        margin-bottom: var(--space-3);
+      }
+      .kpi-card .value {
+        font-size: var(--font-size-4);
+        font-weight: 700;
+      }
+      .kpi-card .sub {
+        font-size: var(--font-size--1);
+        color: var(--text-secondary);
+        margin-top: var(--space-2);
+      }
+      .kpi-card.compound .metric + .sub {
+        margin-bottom: var(--space-5);
+      }
+      .kpi-card .chart-row {
+        margin-top: var(--space-5);
+        border-top: 1px solid var(--neutral-100);
+        padding-top: var(--space-5);
+      }
+      .kpi-card .chart-row .year {
+        font-size: var(--font-size--2, 0.75rem);
+        color: var(--text-secondary);
+      }
+      .kpi-card .chart-row .value {
+        font-size: var(--font-size-2);
+      }
+      .kpi-card .sparkline {
+        width: 100%;
+        height: 28px;
+        margin: var(--space-2) 0;
+        display: block;
+      }
+      .kpi-stack {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-5);
+      }
+
+      .cms-note {
+        background: var(--surface-secondary);
+        border: 1px dashed var(--neutral-200);
+        border-radius: var(--rounded-3);
+        padding: var(--space-6);
+        font-size: var(--font-size--1);
+        color: var(--text-secondary);
+      }
+
+      /* footer */
+      footer.site {
+        background: var(--surface-primary);
+        border-top: 1px solid var(--neutral-100);
+        padding: var(--space-11) var(--space-9);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: var(--space-9);
+      }
+      .footer-brand strong {
+        display: block;
+        font-size: var(--font-size-0);
+      }
+      .footer-brand span {
+        color: var(--text-secondary);
+        font-size: var(--font-size--1);
+      }
+      .footer-col h5 {
+        font-size: var(--font-size--1);
+        font-weight: 700;
+        margin-bottom: var(--space-4);
+      }
+      .footer-services {
+        display: flex;
+        gap: var(--space-6);
+        align-items: flex-start;
+      }
+      .footer-services .txt strong {
+        display: block;
+        font-size: var(--font-size--1);
+        margin-bottom: var(--space-2);
+      }
+      .footer-services .txt p {
+        font-size: var(--font-size--2, 0.75rem);
+        color: var(--text-secondary);
+        margin-bottom: var(--space-3);
+      }
+      .footer-services .txt a {
+        font-size: var(--font-size--1);
+        text-decoration: underline;
+      }
+      .footer-img-placeholder {
+        width: 64px;
+        height: 48px;
+        border-radius: var(--rounded-2);
+        background: var(--surface-tertiary);
+        color: var(--neutral-300);
+        display: grid;
+        place-items: center;
+        flex: none;
+      }
+      .footer-links li {
+        margin-bottom: var(--space-3);
+        font-size: var(--font-size--1);
+      }
+      .social-row {
+        display: flex;
+        gap: var(--space-5);
+        margin-top: var(--space-9);
+        color: var(--text-secondary);
+      }
+      .btn-manage {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-2);
+        margin-bottom: var(--space-6);
+        padding: var(--space-3) var(--space-5);
+        border: 1px solid var(--neutral-150);
+        border-radius: var(--rounded-2);
+        color: var(--text-primary);
+        font-size: var(--font-size--1);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      @media (max-width: 900px) {
+        .panel-top,
+        .kpi-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrapper-inner header-inner">
+        <div class="logo">
+          <div class="logo-mark">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round">
+              <path d="M4 12h16M4 6h16M4 18h10" />
+            </svg>
+          </div>
+          <div class="logo-text">
+            <strong>Digital Strategie Heidelberg</strong>
+            <span>Heidelberg Digital</span>
+          </div>
+        </div>
+        <button
+          class="theme-toggle"
+          title="Dark mode (nicht funktional im Click-Dummy)">
+          <svg
+            class="icon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="wrapper-inner hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Vision für eine digitalisierte Stadt</p>
+          <h1>Digitale Strategie für Heidelberg</h1>
+          <p>
+            Die Digitalstrategie für Heidelberg zeigt anhand von 5 Leitlinien
+            auf, wie sich die Stadt an die Anforderungen des 21.Jh. anpasst.
+          </p>
+          <a class="btn-primary" href="#leitlinien"
+            >Leitlinien &amp; Kennzahlen entdecken</a
+          >
+        </div>
+        <div class="hero-graphic">
+          <img src="../images/hero/hero_light.jpg" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <main class="wrapper-inner">
+      <section class="block" id="entwicklungsprozess">
+        <h2 class="block-title">ENTWICKLUNGSPROZESS</h2>
+        <p class="block-description">
+          Von den Digitalen Leitlinien zur Digitalisierungsstrategie
+        </p>
+        <img
+          class="process-overview-image"
+          src="../images/processOverview/processOverview.jpg"
+          alt="Prozessschritte von der Entwicklung der Digitalen Leitlinien bis zur Verschriftlichung der Strategie" />
+      </section>
+
+      <section class="block" id="leitlinien">
+        <h2 class="block-title">LEITLINIEN</h2>
+        <p class="block-description">
+          Die Digitalstrategie besteht aus fünf Leitlinien<button
+            type="button"
+            class="info-icon"
+            aria-label="Was sind Leitlinien?">
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4">
+              <circle cx="12" cy="12" r="10" />
+              <path
+                d="M9.5 9.3a2.5 2.5 0 1 1 3.6 2.25c-.75.36-1.1.98-1.1 1.75v.3" />
+              <circle
+                cx="12"
+                cy="17"
+                r="0.6"
+                fill="currentColor"
+                stroke="none" />
+            </svg>
+            <span class="info-tooltip">
+              Digitale Leitlinien sind grundlegende Ziele und Handlungsmaxime,
+              auf deren Basis die digitale Transformation in Heidelberg
+              ausgerichtet und vorangetrieben wird. Die Leitlinien dienen dabei
+              als Wegweiser, die digitale Transformation im Sinne der
+              Stadtgesellschaft zu entwickeln.
+              <span class="info-tooltip-arrow"></span>
+            </span></button
+          >, mit Zielbeschreibung und dazugehörigen Kennzahlen.
+        </p>
+        <div id="leitlinien-list"></div>
+      </section>
+
+      <section class="block" id="grundlage">
+        <h2 class="block-title">GRUNDLAGE</h2>
+        <p class="block-description">
+          Das gedankliche Fundament der Digitalstrategie der Stadt Heidelberg
+          bilden die folgenden Strategiepapiere.
+        </p>
+        <div class="grundlage-carousel">
+          <button
+            class="carousel-btn prev"
+            id="grundlage-prev"
+            aria-label="Zurück">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2">
+              <path d="m15 6-6 6 6 6" />
+            </svg>
+          </button>
+          <div class="grundlage-grid" id="grundlage-grid"></div>
+          <button
+            class="carousel-btn next"
+            id="grundlage-next"
+            aria-label="Weiter">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2">
+              <path d="m9 6 6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site">
+      <div class="footer-grid wrapper-inner">
+        <div class="footer-brand">
+          <strong>Heidelberg</strong>
+          <span>Digital Agentur</span>
+        </div>
+        <div class="footer-col">
+          <h5>Weitere Services</h5>
+          <a class="btn-manage" href="#">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.04 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.04H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.56-1.11 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34H9a1.7 1.7 0 0 0 1.04-1.56V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87V9a1.7 1.7 0 0 0 1.56 1.04H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.56 1.04Z" />
+            </svg>
+            Inhalte verwalten
+          </a>
+          <div class="footer-services">
+            <div class="txt">
+              <strong>Nachhaltigkeitsbericht</strong>
+              <p>
+                Übersicht über aktuelle alle Entwicklungen zur Nachhaltigkeit in
+                Heidelberg
+              </p>
+              <a href="#">Zum Nachhaltigkeitsbericht</a>
+            </div>
+            <div class="footer-img-placeholder">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6">
+                <rect x="3" y="5" width="18" height="14" rx="1.5" />
+                <path d="m3 16 5-5 4 4 3-3 6 6" />
+                <circle cx="8" cy="9" r="1.4" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Weitere Links</h5>
+          <ul class="footer-links">
+            <li><a href="#">Kontakt</a></li>
+            <li><a href="#">Impressum</a></li>
+            <li><a href="#">Datenschutz</a></li>
+            <li><a href="#">Barrierefreiheit</a></li>
+            <li><a href="#">Kulturamt Heidelberg</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-grid wrapper-inner">
+        <div class="social-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18.9 3H21l-6.6 7.5L22 21h-6.4l-5-6.5-5.7 6.5H2.6l7-8-7.4-9.5H9l4.5 6z" />
+          </svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M13.5 21v-8h2.7l.4-3.1h-3.1V8c0-.9.3-1.5 1.6-1.5h1.6V3.6C15.9 3.5 15 3.4 14 3.4c-2.4 0-4 1.4-4 4.1v2.4H7.3V13H10v8h3.5Z" />
+          </svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4s-3.9 0-6.7.2c-.4 0-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.8v1.4c0 1.8.2 3.6.2 3.6s.2 1.5.8 2.1c.8.8 1.9.8 2.4.9 1.7.2 7.4.2 7.4.2s3.9 0 6.7-.2c.4-.1 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.8.2-3.6v-1.4c0-1.8-.2-3.6-.2-3.6ZM9.9 14.6V8.9l5.4 2.9-5.4 2.8Z" />
+          </svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+            <circle
+              cx="12"
+              cy="12"
+              r="4.2"
+              fill="var(--surface-primary,#fff)" />
+            <circle
+              cx="17.2"
+              cy="6.8"
+              r="1.1"
+              fill="var(--surface-primary,#fff)" />
+          </svg>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // GRUNDLAGE reference list — labels verbatim from the Design Brief / low-fi mock,
+      // paired with the real cover-page images in design/images/strategicFoundation.
+      const GRUNDLAGE = [
+        {
+          label: "Stadtentwicklungsplan Heidelberg",
+          file: "Stadtenwicklungsplan_Heidelberg.png"
+        },
+        {
+          label: "Digitalisierungsstrategie Baden-Württemberg",
+          file: "Digitalisierungsstrategie_Baden_Würtenberg.png"
+        },
+        {
+          label: "Datenstrategie der Bundesregierung",
+          file: "Datenstrategie_der_Bundesregierung.png"
+        },
+        {label: "Smart City Charta", file: "Smart_City_Charta.png"},
+        {label: "EU-Klimaschutzstrategie", file: "EU_Klimaschutzstrategie.png"},
+        {label: "Leipzig Charta", file: "Leipzig_Charta.png"},
+        {label: "New Urban Agenda", file: "New_Urban_Agenda.png"},
+        {
+          label: "Sustainable Development Goals",
+          file: "Sustainable_Developement_Goals.png"
+        }
+      ]
+
+      const imagePlaceholderIcon = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m3 16 5-5 4 4 3-3 6 6"/><circle cx="8" cy="9" r="1.4"/></svg>`
+      const extIcon = `<svg class="ext" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>`
+      const chevron = `<svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>`
+      const topicArrow = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`
+      const flipHint = `<svg class="flip-hint" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2v4h-4M3 12a9 9 0 0 1 15-6.7L21 8M7 22v-4h4M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>`
+      function kpiCard(frontHtml, label, extraClass) {
+        return `
+    <div class="kpi-card ${extraClass || ""}">
+      <div class="kpi-card-inner">
+        <div class="kpi-face front">${frontHtml}${flipHint}</div>
+        <div class="kpi-face back">
+          <div class="back-image">${imagePlaceholderIcon}</div>
+          <div class="back-content">
+            <div class="back-label">${label}</div>
+            <div class="desc-skeleton"><span></span><span></span></div>
+            <a class="topic-link" href="#" onclick="event.stopPropagation()">Zum Thema ${topicArrow}</a>
+          </div>
+          ${flipHint}
+        </div>
+      </div>
+    </div>`
+      }
+
+      // No description text exists for these items (not in the Design Brief or the
+      // mock), so the description stays a visible skeleton placeholder rather than
+      // invented content — only the name (real) and cover image (real) are shown.
+      document.getElementById("grundlage-grid").innerHTML = GRUNDLAGE.map(
+        ({label, file}) => `
+  <a class="grundlage-card" href="#">
+    <div class="image-slot"><img src="../images/strategicFoundation/${file}" alt="${label}" /></div>
+    <div class="hover-panel">
+      <span class="label">${label}</span>
+      <div class="desc-skeleton"><span></span><span></span></div>
+    </div>
+  </a>
+`
+      ).join("")
+
+      const grundlageTrack = document.getElementById("grundlage-grid")
+      const grundlagePrev = document.getElementById("grundlage-prev")
+      const grundlageNext = document.getElementById("grundlage-next")
+      function updateGrundlageButtons() {
+        grundlagePrev.disabled = grundlageTrack.scrollLeft <= 0
+        grundlageNext.disabled =
+          grundlageTrack.scrollLeft + grundlageTrack.clientWidth >=
+          grundlageTrack.scrollWidth - 1
+      }
+      grundlagePrev.addEventListener("click", () =>
+        grundlageTrack.scrollBy({
+          left: -grundlageTrack.clientWidth * 0.9,
+          behavior: "smooth"
+        })
+      )
+      grundlageNext.addEventListener("click", () =>
+        grundlageTrack.scrollBy({
+          left: grundlageTrack.clientWidth * 0.9,
+          behavior: "smooth"
+        })
+      )
+      grundlageTrack.addEventListener("scroll", updateGrundlageButtons)
+      updateGrundlageButtons()
+
+      // KPI content and copy below is transcribed verbatim from
+      // design/low_fidelity_prototyp/landing_page_partly_expanded.png (Leitlinie 1 & 2).
+      // Leitlinie 3-5 have no mocked expanded content yet, so their panel shows the
+      // Payload-CMS note verbatim from design_documents (rather than invented KPIs).
+      const LEITLINIEN = [
+        {
+          icon: "digitale_haltung.svg",
+          title: "LEITLINIE 1 - DIGITALE HALTUNG",
+          themen: 6,
+          kpis: 13,
+          wirWollen: [
+            "Digitalisierung muss Sinn stiften und darf kein Selbstzweck sein",
+            "Offen und aufgeschlossen gegenüber neuen Technologien sein"
+          ],
+          kernziele: [
+            "Kulturwandel fördern",
+            "Technologie wagen",
+            "Prozesse verbessern"
+          ],
+          kpiHtml: `
+      <div class="kpi-grid">
+        ${kpiCard(`<div class="cap">Digitale Scouts ${extIcon}</div><div class="value">91</div><div class="sub">Digitale Scouts</div>`, "Digitale Scouts")}
+        ${kpiCard(`<div class="cap">Einführung der E-Akte ${extIcon}</div><div class="value">100%</div><div class="sub">Der Ämter haben auf E-Akte umgestellt</div>`, "Einführung der E-Akte")}
+        ${kpiCard(
+          `
+          <div class="cap">MeinHeidelberg App ${extIcon}</div>
+          <div class="metric"><div class="value">48</div><div class="sub">aktuelle Nutzer:innen der HeidelbergApp</div></div>
+          <div class="chart-row">
+            <span class="year">2023</span>
+            <div class="value">412</div>
+            ${sparkline()}
+            <div class="sub">jährliche Downloads der App</div>
+          </div>`,
+          "MeinHeidelberg App",
+          "compound"
+        )}
+        <div class="kpi-stack">
+          ${kpiCard(`<div class="cap">Digitale Bürgerdienste ${extIcon}</div><div class="value">48</div><div class="sub">OZG Leistungen werden OZG-konform digital angeboten</div>`, "Digitale Bürgerdienste")}
+          ${kpiCard(`<div class="cap">Bürgeramt Virtuell ${extIcon}</div><div class="value">2670</div><div class="sub">Video-Calls mit Bürger:innen pro Monat</div>`, "Bürgeramt Virtuell")}
+        </div>
+      </div>`
+        },
+        {
+          icon: "nachhaltigkeit_und_klimaschutz.svg",
+          title: "LEITLINIE 2 - NACHHALTIGKEIT UND KLIMASCHUTZ",
+          themen: 6,
+          kpis: 13,
+          wirWollen: [
+            "Die 17 Ziele für nachhaltige Entwicklung der Vereinten Nationen sowie das Ziel der Klimaneutralität bis 2030 zu erreichen",
+            "Neue Formen der Mobilität zu erproben und zu ermöglichen",
+            "nachhaltige digitale Infrastruktur aufbauen."
+          ],
+          kernziele: [
+            "Klima-nachhaltig schützen",
+            "Mobilitätswende anstoßen",
+            "Infrastruktur ausbauen"
+          ],
+          kpiHtml: `
+      <div class="kpi-grid">
+        ${kpiCard(`<div class="cap">Klimakompass ${extIcon}</div><div class="value">385</div><div class="sub">Echtzeitdatenabfragen Klimakompass</div>`, "Klimakompass")}
+        ${kpiCard(`<div class="cap">Unterstützung des Breitband- und Glasfaserausbaus ${extIcon}</div><div class="value">85%</div><div class="sub">Der Haushalte &amp; Unternehmen haben Glasfaser bzw. Breitbandanschluss</div>`, "Unterstützung des Breitband- und Glasfaserausbaus")}
+        ${kpiCard(
+          `
+          <div class="cap">Verkehrszählmessung ${extIcon}</div>
+          <div class="metric"><div class="value">3 568</div><div class="sub">Fahrzeuge werden durchschnittlich täglich pro Sensor erfasst</div></div>
+          <div class="chart-row">
+            <span class="year">2023</span>
+            <div class="value">150 012</div>
+            ${sparkline()}
+            <div class="sub">durchschnittlich erfasste Fahrzeuge</div>
+          </div>`,
+          "Verkehrszählmessung",
+          "compound"
+        )}
+        <div class="kpi-stack">
+          ${kpiCard(`<div class="cap">Parkleitsystem ${extIcon}</div><div class="value">21</div><div class="sub">Angebundene Parkhäuser auf parken.heidelberg.de</div>`, "Parkleitsystem")}
+        </div>
+      </div>`
+        },
+        {
+          icon: "bildung_u_soziale_teilhabe.svg",
+          title: "LEITLINIE 3 - BILDUNG &amp; SOZIALE TEILHABE",
+          themen: 6,
+          kpis: 13
+        },
+        {
+          icon: "buergerbeteiligung_u_kooperation.svg",
+          title: "LEITLINIE 4 - BÜRGERBETEILIGUNG &amp; KOOPERATION",
+          themen: 6,
+          kpis: 13
+        },
+        {
+          icon: "offene_daten_kultur.svg",
+          title: "LEITLINIE 5 - OFFENE DATENKULTUR",
+          themen: 6,
+          kpis: 13
+        }
+      ]
+
+      function sparkline() {
+        return `<svg class="sparkline" viewBox="0 0 200 28" preserveAspectRatio="none">
+    <polyline points="0,20 30,18 60,15 90,17 120,10 150,12 180,4 200,6" fill="none" stroke="var(--brand-400)" stroke-width="2" />
+  </svg>`
+      }
+
+      function kernzielIcon() {
+        return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>`
+      }
+
+      document.getElementById("leitlinien-list").innerHTML = LEITLINIEN.map(
+        (l, i) => `
+  <div class="leitlinie" data-index="${i}">
+    <button class="leitlinie-header">
+      <img class="pillar-icon" src="../images/pillaricons/${l.icon}" alt="" />
+      <span class="title">${l.title}</span>
+      <span class="counts"><span><b>${l.themen}</b>Themen</span><span class="sep">|</span><span><b>${l.kpis}</b>KPI's</span></span>
+      ${chevron}
+    </button>
+    <div class="leitlinie-panel">
+      ${
+        l.kpiHtml
+          ? `
+        <div class="panel-top">
+          <div>
+            <h4>WIR WOLLEN</h4>
+            <ul class="wir-wollen">${l.wirWollen.map((w) => `<li>${w}</li>`).join("")}</ul>
+          </div>
+          <div>
+            <h4>KERNZIELE</h4>
+            <div class="kernziele">
+              ${l.kernziele.map((k) => `<div class="kernziel"><div class="icon-badge">${kernzielIcon()}</div><span>${k}</span></div>`).join("")}
+            </div>
+          </div>
+        </div>
+        ${l.kpiHtml}
+      `
+          : `
+        <div class="cms-note">Leitlienien, Themen und KPI's werden durch das Amt und Digital-Agentur in Payload-CMS gepflegt.</div>
+      `
+      }
+    </div>
+  </div>
+`
+      ).join("")
+
+      document.querySelectorAll(".leitlinie-header").forEach((btn) => {
+        btn.addEventListener("click", () =>
+          btn.closest(".leitlinie").classList.toggle("open")
+        )
+      })
+
+      document.querySelectorAll(".kpi-card").forEach((card) => {
+        card.addEventListener("click", () => card.classList.toggle("flipped"))
+      })
+    </script>
+  </body>
+</html>

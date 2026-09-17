@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 82 77" width="82" height="77" role="img" aria-label="Connected network">
+  <g fill="#236192" stroke="#236192">
+    <path fill="none" stroke-width="4.6" stroke-linecap="round" d="M16 13.5L41.5 39.5L51.5 13.5M41.5 39.5L67 44.5M41.5 39.5L54 65M41.5 39.5L16 59.5"/>
+    <circle cx="16" cy="13.5" r="7.7" stroke="none"/>
+    <circle cx="51.5" cy="13.5" r="7.7" stroke="none"/>
+    <circle cx="67" cy="44.5" r="7.5" stroke="none"/>
+    <circle cx="54" cy="65" r="7.8" stroke="none"/>
+    <circle cx="16" cy="59.5" r="7.8" stroke="none"/>
+    <circle cx="41.5" cy="39.5" r="13.2" stroke="none"/>
+  </g>
+</svg>
